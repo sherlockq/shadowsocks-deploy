@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 
+terraform.tfvars
+
 # Crash log files
 crash.log
 
@@ -21,4 +23,5 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
-public_dns.txt
+
+.idea/
