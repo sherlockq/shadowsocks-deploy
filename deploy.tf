@@ -125,3 +125,18 @@ output "public_dns" {
 output "public_ip" {
   value = aws_instance.ssocks.*.public_ip
 }
+
+
+data "aws_route53_zone" "primary" {
+  count = var.create_dns_record ? 1 : 0
+  name = var.domain
+}
+
+resource "aws_route53_record" "vpn" {
+  count = var.create_dns_record ? 1 : 0
+  zone_id = data.aws_route53_zone.primary[0].zone_id
+  name = var.host
+  type = "A"
+  ttl = 300
+  records = aws_instance.ssocks.*.public_ip
+}

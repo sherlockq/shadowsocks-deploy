@@ -14,3 +14,16 @@ variable "region" {
 variable "password" {
   default = "changethispasswordinaseparatefile"
 }
+
+variable "create_dns_record" {
+  type = bool
+  default = false
+}
+
+variable "domain" {
+  default = "example.com"
+}
+
+variable "host" {
+  default = "vpn"
+}
