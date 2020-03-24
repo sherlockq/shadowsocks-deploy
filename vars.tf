@@ -3,6 +3,12 @@ variable "github_token" {
   default = "#any-token-without-scope#"
 }
 
+variable "gh_users_ssh" {
+  type = list(string)
+  default = []
+}
+
+
 variable "profile" {
   default = "default"
 }

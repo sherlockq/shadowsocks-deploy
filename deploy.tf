@@ -9,12 +9,6 @@ provider "github" {
   version = "~> 2.1.0"
 }
 
-variable "gh_users_ssh" {
-  type = list(string)
-  default = [
-    "sherlockq"]
-}
-
 data "github_user" "ssh" {
   count = length(var.gh_users_ssh)
   username = var.gh_users_ssh[count.index]
