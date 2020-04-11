@@ -21,17 +21,16 @@ $ brew install terraform
 ## Configuration
 
 Add `terraform.tfvars` to specify customized information:
-```hcl-terraform
-/* expected region for the server */
+```properties
+# expected region for the server
 region = "us-west-2" 
 github_token = "d749883e4c75d08355a4b5cdc99604201924b4ed"
-/* Github handle(username in your github url), used
-   to get github public key for server ssh access */
+# Github handle(username in your github url), used to get github public key for server ssh access
 gh_users_ssh = ["github handle(username)"]
 profile = "profile for AWS CLI, remove to use default"
 password = "password for shadowsocks"
 domain = "Route53 managed domain if a dns record is expected to add"
-/* change to false if no dns record should be created */
+# change to false if no dns record should be created
 create_dns_record = true
 ```
 
