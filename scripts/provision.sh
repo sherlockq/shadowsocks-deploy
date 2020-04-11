@@ -1,26 +1,15 @@
 #!/usr/bin/env bash
 mkdir -p /srv
 cd /srv
-wget https://github.com/shadowsocks/shadowsocks-go/releases/download/1.2.1/shadowsocks-server.tar.gz
-tar xvfz shadowsocks-server.tar.gz
-rm -rf shadowsocks-server.tar.gz
-
-sudo bash -c 'cat >/srv/config.json <<EOL
-{
-    "server":"0.0.0.0",
-    "server_port":443,
-    "password":"${password}",
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "fast_open": true
-}
-EOL'
+wget https://github.com/shadowsocks/go-shadowsocks2/releases/download/v0.1.0/shadowsocks2-linux.gz
+gunzip shadowsocks2-linux.gz
+chmod +x shadowsocks2-linux
 
 sudo bash -c 'cat >/lib/systemd/system/ssocks.service <<EOL
 [Unit]
 Description=ssocks daemon
 [Service]
-ExecStart=/srv/shadowsocks-server -c /srv/config.json
+ExecStart=/srv/shadowsocks2-linux -s ':443' -cipher AEAD_CHACHA20_POLY1305 -password ${password}
 Restart=always
 User=root
 Group=root
@@ -31,3 +20,4 @@ EOL'
 sudo systemctl daemon-reload
 sudo systemctl enable ssocks.service
 sudo systemctl start ssocks
+

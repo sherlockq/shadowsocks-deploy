@@ -52,18 +52,6 @@ Once it is complete, your shadowsocks server is up and running.
 
 Run `terraform output` to show the dns and ip address of the created server. 
 
-Default shadowsocks configuration (which can be adjusted) is:
-
-```json
-{
-    "server":"0.0.0.0",
-    "server_port":443,
-    "password":"secrethere",
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "fast_open": true
-}
-```
 
 When you are done using your instance:
 
@@ -72,6 +60,14 @@ $ terraform destroy
 ```
 You will have to confirm by typing `yes`. Destroys the server.
 crying to me.  If my code kills your cat, same deal.  Have fun, stay safe, and be smart.
+
+### Configuration
+To change the encryption algorithm and listening port, check `scripts/provision.sh` and help yourself.
+
+Current configuration is:
+```shell script
+/srv/shadowsocks2-linux -s ':443' -cipher AEAD_CHACHA20_POLY1305 -password ${password}
+``` 
 
 
 ### SSH
@@ -92,4 +88,4 @@ Then run `./ssh_to.sh` to connect to your server.
 
 Forked from the fundamental work of [jvsteiner](https://github.com/jvsteiner/shadowsocks-deploy)
 
-To the awesome people at [shadowsocks-go](https://github.com/shadowsocks/shadowsocks-go)
+To the awesome people at [go-shadowsocks2](https://github.com/shadowsocks/go-shadowsocks2)
